@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'; 'express'
 import express from 'express';
+
 const apiService = require('./src/service/APIService');
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
-dotenv.config()
-//const { MongoClient, ServerApiVersion } = require('mongodb');
 
-// import apiService from './src/service/APIService'
+dotenv.config()
+
 // middleware
 const app = express()
 app.use(express.json())
@@ -30,7 +30,6 @@ app.get('/launches', async (req: Request, res: Response) => {
 const PORT = process.env.PORT || 3003
 const DB_USER = process.env.DB_USER
 const DB_PASSWORD = process.env.DB_PASSWORD
-
 
 mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.j3kkis4.mongodb.net/?retryWrites=true&w=majority`)
     .then(() => {
