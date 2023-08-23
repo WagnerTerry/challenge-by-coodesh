@@ -20,7 +20,32 @@ app.get('/', (req: Request, res: Response) => {
 app.get('/launches', async (req: Request, res: Response) => {
     try {
         const apiData = await apiService.fetchDataFromAPI(BASEURL);
-        res.json(apiData)
+
+        const page: number = parseInt(req.query.page as string, 10) || 1; // Página padrão é 1
+        const limit: number = parseInt(req.query.limit as string, 10) || 4; // Limite padrão é 4
+        const itemName = req.query.name || ''; // Nome padrão é vazio
+
+        const filteredItems = apiData.filter(item => item.name.includes(itemName));
+
+        const totalItems: number = filteredItems.length;
+        const totalPages: number = Math.ceil(totalItems / limit); // Arredondamento para cima
+
+        const startIndex = (page - 1) * limit;
+        const endIndex = page * limit;
+
+        const paginatedItems = filteredItems.slice(startIndex, endIndex);
+
+        const hasNext: boolean = page < totalPages;
+        const hasPrevious: boolean = page > 1;
+
+        res.json({
+            results: paginatedItems,
+            page,
+            totalPages,
+            hasNext,
+            hasPrevious
+        });
+
     } catch (error) {
         res.status(400).json({ "message": "Error message" })
     }
