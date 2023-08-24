@@ -11,6 +11,9 @@ dotenv.config()
 const app = express()
 app.use(express.json())
 
+let savedData: any = null;
+
+
 // routes
 const BASEURL = 'https://api.spacexdata.com/v5/launches'
 app.get('/', (req: Request, res: Response) => {
@@ -38,6 +41,14 @@ app.get('/launches', async (req: Request, res: Response) => {
         const hasNext: boolean = page < totalPages;
         const hasPrevious: boolean = page > 1;
 
+        savedData = {
+            results: paginatedItems,
+            page,
+            totalPages,
+            hasNext,
+            hasPrevious
+        }
+
         res.json({
             results: paginatedItems,
             page,
@@ -49,6 +60,31 @@ app.get('/launches', async (req: Request, res: Response) => {
     } catch (error) {
         res.status(400).json({ "message": "Error message" })
     }
+})
+
+app.get('/launches/stats', async (req: Request, res: Response) => {
+    const launchResult = {};
+    //let launchResult
+
+    const allLaunches = await apiService.fetchDataFromAPI(BASEURL);
+    const countLaunch = allLaunches.map((launch) => launch.success)
+    countLaunch.forEach(item => {
+        if (launchResult[item] !== undefined) {
+            return launchResult[item]++;
+        } else {
+            return launchResult[item] = 1;
+        }
+    })
+    //const successLaunch = test.map((s) => true)
+
+    console.log("testa", launchResult)
+    // let success = savedData.results.map((status: boolean) => status.success === true)
+    // let fail = savedData.results.map((status: boolean) => status === false)
+    // console.log("aaan")
+    // res.status(200).send()
+
+    //res.status(200).json(allLaunches)
+    // res.status(200).send({ message: "Fullstack Challenge 🏅 - Space X API" })
 })
 
 // conexão com o mongoDB Atlas
