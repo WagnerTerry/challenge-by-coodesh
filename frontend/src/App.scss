@@ -8,5 +8,18 @@ body {
         font-weight: bold;
         margin-top: 40px;
     }
+
+    main {
+        .charts{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+            .piechart, .barchart {
+                text-align: center;
+                width: 50%;
+            }
+        }
+    }
 }
 
