@@ -1,6 +1,7 @@
 body {
     background-color: #3e3e42;
     color: white;
+    text-align: center;
 
     header {
         text-align: center;
@@ -20,6 +21,47 @@ body {
                 width: 50%;
             }
         }
+
+        .fetch-rocket {
+            margin: 56px 0;
+            .search {
+                display: flex;
+                justify-content: space-evenly;
+            }
+        }
+
+        .flights {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 80%;
+          
+                thead {
+                  background: linear-gradient(to right, lightskyblue, silver);
+                  position: sticky;
+                  top: 0;
+                }
+          
+              }
+          
+              td,
+              th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+              }
+          
+              tbody {
+                tr:nth-child(odd) {
+                  background: linear-gradient(to right, #16b468, #cec32d);
+                }
+              }
+        }
+
     }
 }
 
