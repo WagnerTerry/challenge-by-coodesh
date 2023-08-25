@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import express from 'express';
 import { ParsedQs } from 'qs';
+import express from 'express';
 const Launch = require('../model/Launch')
 
 const apiService = require('../service/APIService');
@@ -17,6 +17,7 @@ const BASEURL = 'https://api.spacexdata.com/v5/launches'
 router.get('/', (req: Request, res: Response) => {
     res.status(200).send({ message: "Fullstack Challenge 🏅 - Space X API" })
 })
+
 
 router.get('/launches', async (req: Request, res: Response) => {
     try {
@@ -76,7 +77,7 @@ router.get('/launches/stats', async (req: Request, res: Response) => {
             return launchResult[item] = 1;
         }
     })
-    const rocket = allLaunches.map((launch: { name: any; rocket: any; cores: { reused: any; }[]; }) => { return { name: launch.name, rocket: launch.rocket, reused: launch.cores[0].reused } })
+    const rocket = allLaunches.map((launch: { name: string; rocket: string; cores: { reused: any; }[]; _id: string }) => { return { name: launch.name, rocket: launch.rocket, reused: launch.cores[0].reused, _id: launch._id } })
 
     res.status(200).json({ launchResult, rocket })
 })
@@ -91,14 +92,14 @@ router.get("/launch", async (req: Request, res: Response) => {
     }
 })
 
-
 router.post("/launch", async (req: Request, res: Response) => {
-    const { name, rocket, success } = req.body
+    const { name, rocket, success, id } = req.body
 
     const launch = {
         name,
         rocket,
-        success
+        success,
+        id
     }
 
     try {
