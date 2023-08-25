@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import express from 'express';
 import { ParsedQs } from 'qs';
+const Launch = require('../model/Launch')
 
 const apiService = require('../service/APIService');
 
@@ -12,6 +13,7 @@ let savedData: any = null;
 
 // routes
 const BASEURL = 'https://api.spacexdata.com/v5/launches'
+
 router.get('/', (req: Request, res: Response) => {
     res.status(200).send({ message: "Fullstack Challenge 🏅 - Space X API" })
 })
@@ -77,6 +79,34 @@ router.get('/launches/stats', async (req: Request, res: Response) => {
     const rocket = allLaunches.map((launch: { name: any; rocket: any; cores: { reused: any; }[]; }) => { return { name: launch.name, rocket: launch.rocket, reused: launch.cores[0].reused } })
 
     res.status(200).json({ launchResult, rocket })
+})
+
+router.get("/launch", async (req: Request, res: Response) => {
+    try {
+        const launch = await Launch.find()
+        await Launch.create(launch)
+        res.status(200).json(launch)
+    } catch (error) {
+        res.status(500).json({ message: "Error message", error })
+    }
+})
+
+
+router.post("/launch", async (req: Request, res: Response) => {
+    const { name, rocket, success } = req.body
+
+    const launch = {
+        name,
+        rocket,
+        success
+    }
+
+    try {
+        await Launch.create(launch)
+        res.status(204).send()
+    } catch (error) {
+        res.status(400).json({ message: "Error message", error })
+    }
 })
 
 module.exports = router

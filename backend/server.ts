@@ -1,6 +1,7 @@
 import express from 'express';
 
 const mongoose = require('mongoose')
+const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -8,6 +9,7 @@ const launch = require('./src/routes/launch')
 
 // middleware
 const app = express()
+app.use(cors())
 app.use(express.json())
 
 // routes
