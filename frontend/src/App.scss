@@ -7,8 +7,6 @@ body {
     padding: 0; /* Remova preenchimentos padrão do body */
     width: 100vw; /* Largura 100% do viewport */
     height: 100vh; /* Altura 100% do viewport */
-    overflow: hidden; /* Para evitar barras de rolagem */
-
 }
     #launch {
 
@@ -59,7 +57,7 @@ body {
           
               td,
               th {
-                border: 1px solid #dddddd;
+                border: 1px solid rgb(89, 70, 70);
                 //text-align: left;
                 padding: 8px;
               }
@@ -68,6 +66,9 @@ body {
                 tr:nth-child(odd) {
                   background: #8a8a8a;
                 }
+                tr:nth-child(even) {
+                    background: #211919;
+                  }
               }
         }
     }

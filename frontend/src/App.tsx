@@ -7,7 +7,8 @@ import LaunchService from "./services/LaunchService";
 import "./App.scss"
 
 function App() {
-  const [launch, setLaunch] = useState([] as any)
+  const [launches, setLaunches] = useState([] as any)
+  const [launchStats, setLaunchStats] = useState([] as any)
 
   useEffect(() => {
     const showMessage = async () => {
@@ -15,21 +16,27 @@ function App() {
       window.localStorage.setItem('message', JSON.stringify(message))
     }
 
+    const getLaunches = async () => {
+      const launch = await LaunchService.getLaunches()
+      const launches = launch.results
+      console.log("launc", launches)
+      setLaunches(launches)
+    }
+
     const getStats = async () => {
       const stats = await LaunchService.getStats()
-      console.log("ss", stats)
-      setLaunch(stats)
-
+      setLaunchStats(stats)
     }
 
     showMessage()
+    getLaunches()
     getStats()
   }, [])
 
   const dataPizza = [
-    { name: `Sucesso ${launch && launch.launchResult && launch.launchResult.true}`, value: Number(launch && launch.launchResult && launch.launchResult.true) },
-    { name: `Falha ${launch && launch.launchResult && launch.launchResult.false}`, value: Number(launch && launch.launchResult && launch.launchResult.false) },
-    { name: `Nulo ${launch && launch.launchResult && launch.launchResult.null}`, value: Number(launch && launch.launchResult && launch.launchResult.null) },
+    { name: `Sucesso ${launchStats && launchStats.launchResult && launchStats.launchResult.true}`, value: Number(launchStats && launchStats.launchResult && launchStats.launchResult.true) },
+    { name: `Falha ${launchStats && launchStats.launchResult && launchStats.launchResult.false}`, value: Number(launchStats && launchStats.launchResult && launchStats.launchResult.false) },
+    { name: `Nulo ${launchStats && launchStats.launchResult && launchStats.launchResult.null}`, value: Number(launchStats && launchStats.launchResult && launchStats.launchResult.null) },
   ];
 
   const barChartData = [
@@ -44,13 +51,15 @@ function App() {
 
       <main>
 
+        {/* {launches && launches.map((test: any) => console.log('asw', test.details))} */}
+
         <div className='launch-results'>
           <h3>Resultado de Lançamento</h3>
           <br />
-          <span className='success'>Sucesso: {launch && launch.launchResult && launch.launchResult.true}</span>
+          <span className='success'>Sucesso: {launchStats && launchStats.launchResult && launchStats.launchResult.true}</span>
           <br />
           <br />
-          <span className='fail'>Falha: {launch && launch.launchResult && launch.launchResult.false}</span>
+          <span className='fail'>Falha: {launchStats && launchStats.launchResult && launchStats.launchResult.false}</span>
 
         </div>
 
@@ -77,7 +86,7 @@ function App() {
 
         <div className="flights">
           <table>
-            <thead>
+            {/* <thead>
               <tr>
                 <th>No Vôo</th>
                 <th>Logo</th>
@@ -87,17 +96,24 @@ function App() {
                 <th>Resultado</th>
                 <th>Vídeo</th>
               </tr>
-            </thead>
+            </thead> */}
             <tbody>
-              <tr>
-                <td data-label="No Vôo">a</td>
-                <td data-label="Logo">a</td>
-                <td data-label="Missão">a</td>
-                <td data-label="Data de lançamento">a</td>
-                <td data-label="Foguete">a</td>
-                <td data-label="Resultado">a</td>
-                <td data-label="Vídeo">a</td>
-              </tr>
+              {launches && launches.map((launch: any, idx: any) => (
+                <tr key={idx}>
+                  <td data-label="No Vôo">{launch && launch.flight_number}</td>
+                  <td data-label="Logo">
+                    <img src={launch && launch.links.patch.small}
+                      alt="Logo"
+                    />
+                  </td>
+                  <td data-label="Missão">{launch && launch.details}</td>
+                  <td data-label="Data de lançamento">{launch && launch.date_utc}</td>
+                  <td data-label="Foguete">{launch && launch.name}</td>
+                  {/* <td data-label="Resultado">{launch && launch.success}</td>
+                  <td data-label="Vídeo">{launch && launch.webcast}</td> */}
+                </tr>
+              ))}
+
             </tbody>
           </table>
         </div>

@@ -8,8 +8,14 @@ export default class LaunchService {
         return result.data
     }
 
+    static getLaunches = async () => {
+        const result = await axios.get(`${BaseURL}/launches/`)
+        return result.data
+    }
+
     static getStats = async () => {
         const result = await axios.get(`${BaseURL}/launches/stats`)
         return result.data
     }
+
 }
