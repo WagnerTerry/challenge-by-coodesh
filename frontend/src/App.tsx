@@ -6,27 +6,37 @@ import LaunchService from "./services/LaunchService";
 
 import "./App.scss"
 
-const dataPizza = [
-  { name: 'Sucesso 8', value: 150 },
-  { name: 'Falha', value: 40 },
-  { name: 'Nulo', value: 10 },
-];
-
-const barChartData = [
-  { name: 'January', sales: 65 },
-  { name: 'February', sales: 59 },
-  { name: 'March', sales: 80 },
-];
-
-
 function App() {
+  const [launch, setLaunch] = useState([] as any)
+
   useEffect(() => {
     const showMessage = async () => {
       const message = await LaunchService.showMessage()
       window.localStorage.setItem('message', JSON.stringify(message))
     }
+
+    const getStats = async () => {
+      const stats = await LaunchService.getStats()
+      console.log("ss", stats)
+      setLaunch(stats)
+
+    }
+
     showMessage()
+    getStats()
   }, [])
+
+  const dataPizza = [
+    { name: `Sucesso ${launch && launch.launchResult && launch.launchResult.true}`, value: Number(launch && launch.launchResult && launch.launchResult.true) },
+    { name: `Falha ${launch && launch.launchResult && launch.launchResult.false}`, value: Number(launch && launch.launchResult && launch.launchResult.false) },
+    { name: `Nulo ${launch && launch.launchResult && launch.launchResult.null}`, value: Number(launch && launch.launchResult && launch.launchResult.null) },
+  ];
+
+  const barChartData = [
+    { name: 'January', sales: 65 },
+    { name: 'February', sales: 59 },
+    { name: 'March', sales: 80 },
+  ];
 
   return (
     <div id="launch">

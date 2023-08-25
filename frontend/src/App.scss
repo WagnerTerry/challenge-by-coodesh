@@ -16,7 +16,7 @@ body {
         text-align: center;
         font-size: 34pt;
         font-weight: bold;
-        margin-top: 40px;
+        margin: 40px 0;
     }
 
     main {
@@ -74,7 +74,10 @@ body {
 }
 
 @media (max-width: 400px) {
-      main {
+      main {        
+        .charts {
+            flex-direction: column;
+        }
         table {
           border: 1px solid #ccc;
           border-collapse: collapse;

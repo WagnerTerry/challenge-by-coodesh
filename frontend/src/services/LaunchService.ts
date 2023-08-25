@@ -7,4 +7,9 @@ export default class LaunchService {
         const result = await axios.get(`${BaseURL}`)
         return result.data
     }
+
+    static getStats = async () => {
+        const result = await axios.get(`${BaseURL}/launches/stats`)
+        return result.data
+    }
 }
