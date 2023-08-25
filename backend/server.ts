@@ -78,16 +78,9 @@ app.get('/launches/stats', async (req: Request, res: Response) => {
             return launchResult[item] = 1;
         }
     })
-    //const successLaunch = test.map((s) => true)
+    const rocket = allLaunches.map((launch) => { return { name: launch.name, rocket: launch.rocket, reused: launch.cores[0].reused } })
 
-    console.log("testa", launchResult)
-    // let success = savedData.results.map((status: boolean) => status.success === true)
-    // let fail = savedData.results.map((status: boolean) => status === false)
-    // console.log("aaan")
-    // res.status(200).send()
-
-    res.status(200).json({ launchResult })
-    // res.status(200).send({ message: "Fullstack Challenge 🏅 - Space X API" })
+    res.status(200).json({ launchResult, rocket })
 })
 
 // conexão com o mongoDB Atlas
