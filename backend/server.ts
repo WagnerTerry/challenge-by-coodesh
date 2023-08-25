@@ -41,8 +41,11 @@ app.get('/launches', async (req: Request, res: Response) => {
         const hasNext: boolean = page < totalPages;
         const hasPrevious: boolean = page > 1;
 
+        const totalDocs = paginatedItems.length * totalPages
+
         savedData = {
             results: paginatedItems,
+            totalDocs,
             page,
             totalPages,
             hasNext,
@@ -51,6 +54,7 @@ app.get('/launches', async (req: Request, res: Response) => {
 
         res.json({
             results: paginatedItems,
+            totalDocs,
             page,
             totalPages,
             hasNext,
@@ -64,7 +68,6 @@ app.get('/launches', async (req: Request, res: Response) => {
 
 app.get('/launches/stats', async (req: Request, res: Response) => {
     const launchResult = {};
-    //let launchResult
 
     const allLaunches = await apiService.fetchDataFromAPI(BASEURL);
     const countLaunch = allLaunches.map((launch) => launch.success)
@@ -83,7 +86,7 @@ app.get('/launches/stats', async (req: Request, res: Response) => {
     // console.log("aaan")
     // res.status(200).send()
 
-    //res.status(200).json(allLaunches)
+    res.status(200).json({ launchResult })
     // res.status(200).send({ message: "Fullstack Challenge 🏅 - Space X API" })
 })
 
