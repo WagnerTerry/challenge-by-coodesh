@@ -1,6 +1,8 @@
+import React, { useState, useEffect } from 'react'
+
 import PieChart from "./components/PieChart"
 import BarChart from "./components/BarChart"
-
+import LaunchService from "./services/LaunchService";
 
 import "./App.scss"
 
@@ -16,7 +18,15 @@ const barChartData = [
   { name: 'March', sales: 80 },
 ];
 
+
 function App() {
+  useEffect(() => {
+    const showMessage = async () => {
+      const message = await LaunchService.showMessage()
+      window.localStorage.setItem('message', JSON.stringify(message))
+    }
+    showMessage()
+  }, [])
 
   return (
     <div id="launch">
