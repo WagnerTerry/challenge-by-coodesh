@@ -75,7 +75,22 @@ body {
 
 @media (max-width: 400px) {
     #launch {
-      main {        
+      main {      
+        .launch-results  {
+            margin-bottom: 32px;
+            background-color: #818192;
+            padding: 16px;
+            span {
+                font-size: 14pt;
+    
+            }
+            .success {
+                color: rgb(63, 221, 63);
+            }
+            .fail {
+                color: rgb(189, 16, 16);
+            }
+        }
         .charts {
             flex-direction: column;
 

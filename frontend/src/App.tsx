@@ -43,6 +43,17 @@ function App() {
       <header>Space X</header>
 
       <main>
+
+        <div className='launch-results'>
+          <h3>Resultado de Lançamento</h3>
+          <br />
+          <span className='success'>Sucesso: {launch && launch.launchResult && launch.launchResult.true}</span>
+          <br />
+          <br />
+          <span className='fail'>Falha: {launch && launch.launchResult && launch.launchResult.false}</span>
+
+        </div>
+
         <div className="charts">
           <div className="piechart">
             <h2>Lançamentos de foguetes</h2>
