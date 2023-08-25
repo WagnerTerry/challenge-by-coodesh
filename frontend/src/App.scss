@@ -74,9 +74,15 @@ body {
 }
 
 @media (max-width: 400px) {
+    #launch {
       main {        
         .charts {
             flex-direction: column;
+
+            .piechart, .barchart {
+                text-align: center;
+                width: 100%;
+            }
         }
         table {
           border: 1px solid #ccc;
@@ -173,5 +179,4 @@ body {
         }
       }
     }
-  
-
+}

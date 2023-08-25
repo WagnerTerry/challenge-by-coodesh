@@ -45,13 +45,13 @@ function App() {
       <main>
         <div className="charts">
           <div className="piechart">
-            <h2>Bar Chart</h2>
+            <h2>Lançamentos de foguetes</h2>
 
             <PieChart data={dataPizza} />
 
           </div>
           <div className="barchart">
-            <h2>Bar Chart</h2>
+            <h2>Lançamentos por ano</h2>
             <BarChart data={barChartData} />
           </div>
         </div>
