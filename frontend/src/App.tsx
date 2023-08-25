@@ -19,7 +19,7 @@ const barChartData = [
 function App() {
 
   return (
-    <div>
+    <div id="launch">
       <header>Space X</header>
 
       <main>
@@ -48,7 +48,7 @@ function App() {
           <table>
             <thead>
               <tr>
-                <th>N Vôo</th>
+                <th>No Vôo</th>
                 <th>Logo</th>
                 <th>Missão</th>
                 <th>Data de lançamento</th>
@@ -59,13 +59,13 @@ function App() {
             </thead>
             <tbody>
               <tr>
-                <td data-label="Nome do Produto">a</td>
-                <td data-label="Código do Produto">a</td>
-                <td data-label="Descrição">a</td>
-                <td data-label="Unidades">a</td>
-                <td data-label="Valor Custo">a</td>
-                <td data-label="Categoria">a</td>
-                <td data-label="Marca">a</td>
+                <td data-label="No Vôo">a</td>
+                <td data-label="Logo">a</td>
+                <td data-label="Missão">a</td>
+                <td data-label="Data de lançamento">a</td>
+                <td data-label="Foguete">a</td>
+                <td data-label="Resultado">a</td>
+                <td data-label="Vídeo">a</td>
               </tr>
             </tbody>
           </table>
