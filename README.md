@@ -35,8 +35,10 @@ depois executar no terminal
 - Typescript
 - React
 - Sass
+- Flexbox
 - axios
 - recharts
+- LocalStorage
 
 ## Dependências Frontend
 - npm i sass
