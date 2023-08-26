@@ -19,6 +19,8 @@
     "mongodb": "^5.8.0",
     "mongoose": "^7.4.4",
     "node-cron": "^3.0.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
     "tsup": "^7.2.0"
   },
   "devDependencies": {

@@ -1,0 +1,158 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Space X api",
+        "description": "API com informações de lançamentos de foguete",
+        "version": "1.0.0",
+        "contact": {
+            "email": "goncalveswagner15@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3002",
+            "description": "Development server"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+     "paths": {
+        "/": {
+            "get": {
+                "tags": [
+                    "Launches"
+                ],
+                "summary": "Mensagem do desafio full stack",
+                "description": "Retorna uma mensagem ",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Fullstack Challenge 🏅 - Space X API"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/launches": {
+            "get": {
+                "tags": [
+                    "Launches"
+                ],
+                "summary": "Lista para criar paginação",
+                "description": "Retorna uma lista ideal para fazer paginação ",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/launches/stats": {
+            "get": {
+                "tags": [
+                    "Launches"
+                ],
+                "summary": "Exibir status dos foguetes",
+                "description": "Retorna lista com informações de status dos foguetes ",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "launchResult": "ae"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/launch": {
+            "get": {
+                "tags": [
+                    "Launches"
+                ],
+                "summary": "Exibir lançamentos do banco",
+                "description": "Retorna lista com informações dos foguetes salvo no banco de dados ",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "launchResult": "ae"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Launches"
+                ],
+                "summary": "Cadastrar um novo lançamento",
+                "description": "Cadastro um lançamento no banco de dados",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string"
+                                  }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    
+                                  }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error Message",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Error Message"
+                                  }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

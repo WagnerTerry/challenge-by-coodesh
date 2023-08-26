@@ -5,6 +5,9 @@ const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config()
 
+const swaggerUI = require('swagger-ui-express')
+const swaggerDocument = require('./swagger.json')
+
 const launch = require('./src/routes/launch')
 const Launch = require('./src/model/Launch')
 const cron = require('node-cron');
@@ -17,6 +20,8 @@ app.use(express.json())
 
 // routes
 app.use("/", launch)
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
+
 
 // conexão com o mongoDB Atlas
 const PORT = process.env.PORT || 3003
