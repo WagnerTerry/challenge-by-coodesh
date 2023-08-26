@@ -19,7 +19,6 @@ function App() {
     const getLaunches = async () => {
       const launch = await LaunchService.getLaunches()
       const launches = launch.results
-      console.log("launc", launches)
       setLaunches(launches)
     }
 
@@ -50,8 +49,6 @@ function App() {
       <header>Space X</header>
 
       <main>
-
-        {/* {launches && launches.map((test: any) => console.log('asw', test.details))} */}
 
         <div className='launch-results'>
           <h3>Resultado de Lançamento</h3>
@@ -86,17 +83,7 @@ function App() {
 
         <div className="flights">
           <table>
-            {/* <thead>
-              <tr>
-                <th>No Vôo</th>
-                <th>Logo</th>
-                <th>Missão</th>
-                <th>Data de lançamento</th>
-                <th>Foguete</th>
-                <th>Resultado</th>
-                <th>Vídeo</th>
-              </tr>
-            </thead> */}
+
             <tbody>
               {launches && launches.map((launch: any, idx: any) => (
                 <tr key={idx}>
@@ -109,8 +96,7 @@ function App() {
                   <td data-label="Missão">{launch && launch.details}</td>
                   <td data-label="Data de lançamento">{launch && launch.date_utc}</td>
                   <td data-label="Foguete">{launch && launch.name}</td>
-                  {/* <td data-label="Resultado">{launch && launch.success}</td>
-                  <td data-label="Vídeo">{launch && launch.webcast}</td> */}
+
                 </tr>
               ))}
 
